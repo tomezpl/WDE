@@ -1,0 +1,6 @@
+# Unnecessary directories 
+.vscode
+obj
+
+# JPGs in root dir, if generated while testing
+*.jpg
