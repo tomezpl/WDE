@@ -1,7 +1,7 @@
-// Main.cc
+// main.cc
 // This will start a WDE session.
 
-#include "Renderer.h"
+#include "renderer.h"
 
 int main()
 {
