@@ -4,3 +4,6 @@ obj
 
 # JPGs in root dir, if generated while testing
 *.jpg
+
+# WDE binaries
+bin/wde*
