@@ -1,31 +1,29 @@
 #ifndef WDE_RENDERER
 #define WDE_RENDERER
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
+#include <gtk/gtk.h>
+#include <webkit/webkit.h>
+#include <iostream>
 
-#include <Awesomium/BitmapSurface.h>
-#include <Awesomium/STLHelpers.h>
-#include <Awesomium/WebCore.h>
+#include "htmlsource.h"
 
 namespace WDE
 {
 	class Renderer
     {
         private:
-            sf::RenderWindow* m_Window;
+            GtkWindow* m_Window;
         
-            Awesomium::WebCore* m_WebCore;
-            Awesomium::WebSession* m_WebSession;
-            Awesomium::WebView* m_WebView;
-            Awesomium::BitmapSurface* m_BitmapSurface;
-            
-            unsigned short m_Width;
-            unsigned short m_Height;
-        
+            WebKitWebView* m_WebView;
+			
+			WDE::HTMLSource* m_HTMLSource;
         public:
+			// Initialise GTK+ before using it.
+			gboolean InitGTK(int &argc, char* argv[]);
+			
+			gboolean DestroyWebView(WebKitWebView* webView, GtkWidget* window);
+			
             Renderer(unsigned short width, unsigned short height);
-            void RenderHTML();
             void MainLoop();
             ~Renderer();
     };

@@ -1,55 +1,55 @@
 #include "renderer.h"
 
 using namespace WDE;
-using namespace sf;
-using namespace Awesomium;
+using namespace std;
+
+gboolean Renderer::DestroyWebView(WebKitWebView* webView, GtkWidget* window)
+{
+	gtk_widget_destroy(window);
+	return TRUE;
+}
+
+static gboolean DestroyWebKit(WebKitWebView* webView, GtkWidget* window)
+{
+	gtk_widget_destroy(window);
+	return TRUE;
+}
 
 Renderer::Renderer(unsigned short width, unsigned short height)
 {
-    m_Window = new RenderWindow(VideoMode(width, height), "WDE Desktop");
-    m_WebCore = WebCore::Initialize(WebConfig());
-    m_WebSession = m_WebCore->CreateWebSession(WSLit(""), WebPreferences());
-    m_WebView = m_WebCore->CreateWebView(width, height);
-    
-    WebURL url(WSLit("http://www.google.com"));
-    m_WebView->LoadURL(url);
-}
-
-void Renderer::RenderHTML()
-{
-    while(m_WebView->IsLoading())
-	{
-		m_WebCore->Update();
-	}
-	m_WebCore->Update();
+	m_Window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
+	gtk_window_resize(m_Window, width, height);
+	g_signal_connect(GTK_WIDGET(m_Window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
 	
-	m_BitmapSurface = (BitmapSurface*)m_WebView->surface();
+	m_WebView = WEBKIT_WEB_VIEW(webkit_web_view_new());
+	g_signal_connect(GTK_WIDGET(m_WebView), "close", G_CALLBACK(DestroyWebKit), m_Window);
+	gtk_container_add(GTK_CONTAINER(m_Window), GTK_WIDGET(m_WebView));
 	
-	if(m_BitmapSurface != 0)
-	{
-		m_BitmapSurface->SaveToJPEG(WSLit("./output.jpg"));
-	}
+	m_HTMLSource = new HTMLSource("./html/index.html");
+	webkit_web_view_load_string(m_WebView, m_HTMLSource->GetHTML(), NULL, NULL, NULL);
 }
 
 void Renderer::MainLoop()
 {
-    Event event;
-    while(m_Window->isOpen())
-    {
-        while(m_Window->pollEvent(event))
-        {
-            if(event.type == Event::Closed)
-                m_Window->close();
-        }
-        
-        m_Window->clear(Color(100, 149, 237));
-        m_Window->display();
-    }
+	gtk_window_present(m_Window);
+	gtk_widget_show_all(GTK_WIDGET(m_Window));
+    gtk_main();
+}
+
+// Initialise GTK+ before using it.
+gboolean Renderer::InitGTK(int &argc, char* argv[])
+{
+	gboolean success = gtk_init_check(&argc, &argv);
+	if(success)
+		cout << "GTK+ initialised successfully." << endl;
+	else
+		cout << "There was a problem initialising GTK+." << endl;
+	return success;
 }
 
 Renderer::~Renderer()
 {
-    m_WebView->Destroy();
-	m_WebSession->Release();
-	WebCore::Shutdown();
+    delete m_WebView;
+	delete m_Window;
+	delete m_HTMLSource;
 }
