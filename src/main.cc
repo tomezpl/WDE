@@ -3,9 +3,9 @@
 
 #include "renderer.h"
 
-int main()
+int main(int argc, char* argv[])
 {
-	WDE::Renderer* renderer = new WDE::Renderer(1280, 720);
+	WDE::Renderer* renderer = new WDE::Renderer(1280, 720, argc, argv);
 	renderer->MainLoop();
 	delete renderer;
 	

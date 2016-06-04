@@ -23,7 +23,7 @@ namespace WDE
 			
 			gboolean DestroyWebView(WebKitWebView* webView, GtkWidget* window);
 			
-            Renderer(unsigned short width, unsigned short height);
+            Renderer(unsigned short width, unsigned short height, int &argc, char* argv[]);
             void MainLoop();
             ~Renderer();
     };

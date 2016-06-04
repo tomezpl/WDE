@@ -15,8 +15,9 @@ static gboolean DestroyWebKit(WebKitWebView* webView, GtkWidget* window)
 	return TRUE;
 }
 
-Renderer::Renderer(unsigned short width, unsigned short height)
+Renderer::Renderer(unsigned short width, unsigned short height, int &argc, char* argv[])
 {
+	InitGTK(argc, argv);
 	m_Window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
 	gtk_window_resize(m_Window, width, height);
 	g_signal_connect(GTK_WIDGET(m_Window), "destroy", G_CALLBACK(gtk_main_quit), NULL);

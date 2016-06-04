@@ -20,7 +20,17 @@ void HTMLSource::LoadFromFile(string pathStr)
 	m_HTMLstr = ss.str();
 }
 
+gchar* HTMLSource::GetHTML()
+{
+	return (gchar*)m_HTMLstr.c_str();
+}
+
 HTMLSource::HTMLSource(string pathStr)
 {
 	LoadFromFile(pathStr);
+}
+
+HTMLSource::~HTMLSource()
+{
+	
 }
