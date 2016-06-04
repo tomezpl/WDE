@@ -1,3 +1,7 @@
+// renderer.cc
+// This implements the Renderer class.
+// It is used to render and display the UI in a GTK window.
+
 #include "renderer.h"
 
 using namespace WDE;
@@ -9,21 +13,14 @@ gboolean Renderer::DestroyWebView(WebKitWebView* webView, GtkWidget* window)
 	return TRUE;
 }
 
-static gboolean DestroyWebKit(WebKitWebView* webView, GtkWidget* window)
+Renderer::Renderer(unsigned short width, unsigned short height)
 {
-	gtk_widget_destroy(window);
-	return TRUE;
-}
-
-Renderer::Renderer(unsigned short width, unsigned short height, int &argc, char* argv[])
-{
-	InitGTK(argc, argv);
 	m_Window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
 	gtk_window_resize(m_Window, width, height);
 	g_signal_connect(GTK_WIDGET(m_Window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
 	
 	m_WebView = WEBKIT_WEB_VIEW(webkit_web_view_new());
-	g_signal_connect(GTK_WIDGET(m_WebView), "close", G_CALLBACK(DestroyWebKit), m_Window);
+	g_signal_connect(GTK_WIDGET(m_WebView), "close", G_CALLBACK(DestroyWebView), m_Window);
 	gtk_container_add(GTK_CONTAINER(m_Window), GTK_WIDGET(m_WebView));
 	
 	m_HTMLSource = new HTMLSource("./html/index.html");
@@ -50,7 +47,7 @@ gboolean Renderer::InitGTK(int &argc, char* argv[])
 
 Renderer::~Renderer()
 {
-    delete m_WebView;
+	delete m_WebView;
 	delete m_Window;
 	delete m_HTMLSource;
 }

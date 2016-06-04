@@ -1,3 +1,6 @@
+// renderer.h
+// Header file for the Renderer class.
+
 #ifndef WDE_RENDERER
 #define WDE_RENDERER
 
@@ -12,19 +15,28 @@ namespace WDE
 	class Renderer
     {
         private:
+			// Root window of the program
             GtkWindow* m_Window;
-        
-            WebKitWebView* m_WebView;
+
+			// Main webview
+			WebKitWebView* m_WebView;
 			
+			// Main HTML source
 			WDE::HTMLSource* m_HTMLSource;
         public:
 			// Initialise GTK+ before using it.
-			gboolean InitGTK(int &argc, char* argv[]);
+			static gboolean InitGTK(int &argc, char* argv[]);
 			
-			gboolean DestroyWebView(WebKitWebView* webView, GtkWidget* window);
+			// Callback function for WebKitGTK to call when the web view needs to be destroyed
+			static gboolean DestroyWebView(WebKitWebView* webView, GtkWidget* window);
 			
-            Renderer(unsigned short width, unsigned short height, int &argc, char* argv[]);
+			// Constructor that will create a window and a webview based on the resolution
+            Renderer(unsigned short width, unsigned short height);
+            
+            // Main renderer loop - this should run in its own thread
             void MainLoop();
+            
+            // Destructor
             ~Renderer();
     };
 }
