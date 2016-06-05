@@ -2,11 +2,13 @@
 // This will start a WDE session.
 
 #include "renderer.h"
+#include <string>
+#include <iostream>
 
 int main(int argc, char* argv[])
 {
 	WDE::Renderer::InitGTK(argc, argv); // Initialise GTK before doing anything
-	WDE::Renderer* renderer = new WDE::Renderer(1280, 720); // Create a new renderer
+	WDE::Renderer* renderer = new WDE::Renderer(std::stoi(std::string(argv[2])), std::stoi(std::string(argv[3])), argv); // Create a new renderer
 	
 	// Start the main renderer loop.
 	// This should run in its own thread, but right now it doesn't.

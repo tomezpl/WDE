@@ -7,6 +7,7 @@
 #include <gtk/gtk.h>
 #include <webkit/webkit.h>
 #include <iostream>
+#include <string>
 
 #include "htmlsource.h"
 
@@ -31,7 +32,9 @@ namespace WDE
 			static gboolean DestroyWebView(WebKitWebView* webView, GtkWidget* window);
 			
 			// Constructor that will create a window and a webview based on the resolution
-            Renderer(unsigned short width, unsigned short height);
+			// It will also load the HTML file specified as the first argument
+			// (hence argument array needs to be passed to argv)
+            Renderer(unsigned short width, unsigned short height, char* argv[]);
             
             // Main renderer loop - this should run in its own thread
             void MainLoop();

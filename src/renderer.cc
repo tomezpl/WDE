@@ -13,7 +13,7 @@ gboolean Renderer::DestroyWebView(WebKitWebView* webView, GtkWidget* window)
 	return TRUE;
 }
 
-Renderer::Renderer(unsigned short width, unsigned short height)
+Renderer::Renderer(unsigned short width, unsigned short height, char* argv[])
 {
 	m_Window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
 	gtk_window_resize(m_Window, width, height);
@@ -23,7 +23,7 @@ Renderer::Renderer(unsigned short width, unsigned short height)
 	g_signal_connect(GTK_WIDGET(m_WebView), "close", G_CALLBACK(DestroyWebView), m_Window);
 	gtk_container_add(GTK_CONTAINER(m_Window), GTK_WIDGET(m_WebView));
 	
-	m_HTMLSource = new HTMLSource("./html/index.html");
+	m_HTMLSource = new HTMLSource(argv[1]);
 	webkit_web_view_load_string(m_WebView, m_HTMLSource->GetHTML(), NULL, NULL, NULL);
 }
 
