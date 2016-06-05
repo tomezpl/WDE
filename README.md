@@ -27,6 +27,13 @@ To perform a full build, simply run:
 
 If you only want to compile objects, take a look at the **Makefile**.
 
-#### Licensing and contributing
+### Usage
+To use WDE, you need to pass the location of the HTML file to start, the width and the height of the screen.
+
+For example, to run the index.html file with a resolution 800x600, assuming you're in the root directory of the project:
+
+`./bin/wde ./html/index.html 800 600`
+
+### Licensing and contributing
 WDE uses the MIT license; take a look at the **LICENSE** file.
 You are more than welcome to contribute to the project, if you wish to do so.
