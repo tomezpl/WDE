@@ -3,7 +3,7 @@
 # It is advised to build WDE with g++.
 # g++ 4.8 should work fine.
 # The CC variable will be used to define the compiler.
-CC=g++
+CC=g++ -std=c++11
 
 # 32-bit flags for CC are defined by the x86 variable
 # Only use this flag if you're on x86_64 (64-bit) and you need to compile in 32-bit.
