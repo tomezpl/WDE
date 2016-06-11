@@ -10,10 +10,6 @@ CC=g++ -std=c++11
 # It is not advised to use this variable. Use a 32-bit virtual machine to build instead.
 x86=-m32 -static-libstdc++
 
-# Prefix for the WDE binary files
-# This is to separate them from shared libraries in ./bin/
-BIN_PREFIX=wde*
-
 # GTK headers
 # These will be added when objects (.o files) are compiled and linked
 GTK_DEV=`pkg-config --cflags gtk+-2.0 webkit-1.0`
@@ -22,7 +18,11 @@ GTK_DEV=`pkg-config --cflags gtk+-2.0 webkit-1.0`
 # These will only be added when objects are linked into program binaries
 GTK_LIB=`pkg-config --libs gtk+-2.0 webkit-1.0`
 
-all: wdesktop
+all: createdirs wdesktop
+
+createdirs:
+	mkdir ./obj
+	mkdir ./bin
 
 wdesktop: wdesktop.o renderer.o htmlsource.o
 	@echo Linking object files into WDE wdesktop binary...
@@ -46,6 +46,6 @@ htmlsource.o: ./src/htmlsource.cc
 
 clean:
 	@echo Cleaning WDE binaries...
-	rm ./bin/$(BIN_PREFIX)*
-	rm ./obj/*
+	rm --recursive -f ./bin/
+	rm --recursive -f ./obj/
 	@echo Finished cleaning WDE binaries.
