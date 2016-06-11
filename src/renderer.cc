@@ -15,6 +15,8 @@ gboolean Renderer::DestroyWebView(WebKitWebView* webView, GtkWidget* window)
 
 Renderer::Renderer(unsigned short width, unsigned short height, char* argv[])
 {
+	m_IsFullscreen = false;
+	
 	m_Window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
 	gtk_window_resize(m_Window, width, height);
 	g_signal_connect(GTK_WIDGET(m_Window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
@@ -25,6 +27,26 @@ Renderer::Renderer(unsigned short width, unsigned short height, char* argv[])
 	
 	m_HTMLSource = new HTMLSource(argv[1]);
 	webkit_web_view_load_string(m_WebView, m_HTMLSource->GetHTML(), NULL, NULL, NULL);
+}
+
+void Renderer::GoFullscreen()
+{
+	m_IsFullscreen = true;
+	gtk_window_fullscreen(m_Window);
+}
+
+void Renderer::GoWindowed()
+{
+	m_IsFullscreen = false;
+	gtk_window_unfullscreen(m_Window);
+}
+
+void Renderer::ToggleFullscreen()
+{
+	if(m_IsFullscreen)
+		GoWindowed();
+	else
+		GoFullscreen();
 }
 
 void Renderer::MainLoop()

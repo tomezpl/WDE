@@ -24,6 +24,8 @@ namespace WDE
 			
 			// Main HTML source
 			WDE::HTMLSource* m_HTMLSource;
+			
+			bool m_IsFullscreen;
         public:
 			// Initialise GTK+ before using it.
 			static gboolean InitGTK(int &argc, char* argv[]);
@@ -36,6 +38,11 @@ namespace WDE
 			// (hence argument array needs to be passed to argv)
             Renderer(unsigned short width, unsigned short height, char* argv[]);
             
+			// Switch window types
+			void GoFullscreen();
+			void GoWindowed();
+			void ToggleFullscreen();
+			
             // Main renderer loop - this should run in its own thread
             void MainLoop();
             

@@ -10,6 +10,9 @@ int main(int argc, char* argv[])
 	WDE::Renderer::InitGTK(argc, argv); // Initialise GTK before doing anything
 	WDE::Renderer* renderer = new WDE::Renderer(std::stoi(std::string(argv[2])), std::stoi(std::string(argv[3])), argv); // Create a new renderer
 	
+	// Since this will be the root window, it must be fullscreen
+	renderer->GoFullscreen();
+	
 	// Start the main renderer loop.
 	// This should run in its own thread, but right now it doesn't.
 	renderer->MainLoop();
