@@ -22,16 +22,16 @@ GTK_DEV=`pkg-config --cflags gtk+-2.0 webkit-1.0`
 # These will only be added when objects are linked into program binaries
 GTK_LIB=`pkg-config --libs gtk+-2.0 webkit-1.0`
 
-all: wde
+all: wdesktop
 
-wde: main.o renderer.o htmlsource.o
-	@echo Linking object files into WDE binary...
-	$(CC) -o./bin/wde ./obj/main.o ./obj/renderer.o ./obj/htmlsource.o $(GTK_DEV) $(GTK_LIB)
+wdesktop: wdesktop.o renderer.o htmlsource.o
+	@echo Linking object files into WDE wdesktop binary...
+	$(CC) -o./bin/wdesktop ./obj/wdesktop.o ./obj/renderer.o ./obj/htmlsource.o $(GTK_DEV) $(GTK_LIB)
 	@echo Finished linking. See CC output if there are any errors.
 
-main.o: ./src/main.cc
-	@echo Compiling main WDE module...
-	$(CC) -c -o./obj/main.o ./src/main.cc $(GTK_DEV)
+wdesktop.o: ./src/wdesktop.cc
+	@echo Compiling main WDE desktop module...
+	$(CC) -c -o./obj/wdesktop.o ./src/wdesktop.cc $(GTK_DEV)
 	@echo Main WDE module compiled. See CC output if there are any errors.
 
 renderer.o: ./src/renderer.cc
