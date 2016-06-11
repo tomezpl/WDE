@@ -33,6 +33,8 @@ void Renderer::GoFullscreen()
 {
 	m_IsFullscreen = true;
 	gtk_window_fullscreen(m_Window);
+	GdkScreen* defScreen = gdk_screen_get_default();
+	gtk_window_resize(m_Window, gdk_screen_get_width(defScreen), gdk_screen_get_height(defScreen));
 }
 
 void Renderer::GoWindowed()
