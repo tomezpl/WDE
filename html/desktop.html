@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-image: url('http://i.imgur.com/Olx9yUJ.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        
+        #taskbar {
+            background-color: #2d81ff;
+            position: absolute;
+            left: 10%;
+            width: 90%;
+            bottom: 0;
+            height: 30px;
+        }
+        
+        #menuBtn {
+            background-color: #33cc33;
+            position: absolute;
+            left: 0;
+            width: 10%;
+            bottom: 0;
+            height: 30px;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 1px 1px black;
+            font-weight: bold;
+            font-style: italic;
+        }
+        
+        #menuBtn:hover {
+            background-color: #5cd65c;
+        }
+        
+        #menuBtn:active {
+            background-color: #33cc33;
+        }
+        
+        #taskbar #clock {
+            position: fixed;
+            right: 0;
+        }
+    </style>
+    
+    <body>
+        <a href="#">
+            <div id="menuBtn">
+                Menu
+            </div>
+        </a>
+        <div id="taskbar">
+            <iframe id="clock" src="http://free.timeanddate.com/clock/i58jrgzn/n1323/tluk/tct/pct/tt0/tw0/tm3/ts1" frameborder="0" width="118" height="18" allowTransparency="true"></iframe>
+        </div>
+    </body>
+</html>
