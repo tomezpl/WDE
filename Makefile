@@ -12,11 +12,11 @@ x86=-m32 -static-libstdc++
 
 # GTK headers
 # These will be added when objects (.o files) are compiled and linked
-GTK_DEV=`pkg-config --cflags gtk+-2.0 webkit-1.0`
+GTK_DEV=`pkg-config --cflags gtk+-3.0 webkit2gtk-3.0`
 
 # GTK libraries
 # These will only be added when objects are linked into program binaries
-GTK_LIB=`pkg-config --libs gtk+-2.0 webkit-1.0`
+GTK_LIB=`pkg-config --libs gtk+-3.0 webkit2gtk-3.0`
 
 all: createdirs wdesktop
 

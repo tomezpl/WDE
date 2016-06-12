@@ -5,7 +5,7 @@
 #define WDE_RENDERER
 
 #include <gtk/gtk.h>
-#include <webkit/webkit.h>
+#include <webkit2/webkit2.h>
 #include <iostream>
 #include <string>
 

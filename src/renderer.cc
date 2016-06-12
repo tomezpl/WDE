@@ -26,7 +26,7 @@ Renderer::Renderer(unsigned short width, unsigned short height, char* argv[])
 	gtk_container_add(GTK_CONTAINER(m_Window), GTK_WIDGET(m_WebView));
 	
 	m_HTMLSource = new HTMLSource(argv[1]);
-	webkit_web_view_load_string(m_WebView, m_HTMLSource->GetHTML(), NULL, NULL, NULL);
+	webkit_web_view_load_html(m_WebView, m_HTMLSource->GetHTML(), NULL);
 }
 
 void Renderer::GoFullscreen()
