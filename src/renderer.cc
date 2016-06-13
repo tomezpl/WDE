@@ -17,16 +17,22 @@ Renderer::Renderer(unsigned short width, unsigned short height, char* argv[])
 {
 	m_IsFullscreen = false;
 	
+	m_WebContext = webkit_web_context_get_default();
+	m_WebSecurityManager = webkit_web_context_get_security_manager(m_WebContext);
+	
+	m_WebSettings = webkit_settings_new();
+	
 	m_Window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
 	gtk_window_resize(m_Window, width, height);
 	g_signal_connect(GTK_WIDGET(m_Window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
 	
 	m_WebView = WEBKIT_WEB_VIEW(webkit_web_view_new());
 	g_signal_connect(GTK_WIDGET(m_WebView), "close", G_CALLBACK(DestroyWebView), m_Window);
+	webkit_web_view_set_settings(m_WebView, m_WebSettings);
 	gtk_container_add(GTK_CONTAINER(m_Window), GTK_WIDGET(m_WebView));
 	
 	m_HTMLSource = new HTMLSource(argv[1]);
-	webkit_web_view_load_html(m_WebView, m_HTMLSource->GetHTML(), NULL);
+	webkit_web_view_load_uri(m_WebView, m_HTMLSource->GetURI());
 }
 
 void Renderer::GoFullscreen()

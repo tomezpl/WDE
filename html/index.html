@@ -12,6 +12,36 @@
 	</style>
 	
 	<body>
-		<h1>Hello, world!</h1>
+		<h1 id="test">Howdy!</h1>
 	</body>
+	
+	<script>
+		function AJAXListener()
+        {
+            document.getElementById("test").innerText = this.responseText;
+        }
+        
+		var xhr = new XMLHttpRequest();
+		
+		function checkStatus()
+		{
+			console.log(xhr.status);
+			console.log(xhr.statusText);
+			document.getElementById("test").innerText = xhr.statusText;
+		}
+		
+        function testAJAX()
+        {
+			checkStatus();
+			window.setInterval(1000, checkStatus);
+            xhr.onload = AJAXListener;
+			checkStatus();
+            xhr.open("GET", "http://127.0.01:1337/test.txt");
+			checkStatus();
+            xhr.send();
+            document.getElementById("test").innerText = "FUK";
+            console.log("HI MOM");
+        }
+		window.onload = testAJAX;
+	</script>
 </html>

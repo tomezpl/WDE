@@ -22,6 +22,15 @@ namespace WDE
 			// Main webview
 			WebKitWebView* m_WebView;
 			
+			// Main settings
+			WebKitSettings* m_WebSettings;
+			
+			// Main context
+			WebKitWebContext* m_WebContext;
+			
+			// Main security manager
+			WebKitSecurityManager* m_WebSecurityManager;
+			
 			// Main HTML source
 			WDE::HTMLSource* m_HTMLSource;
 			

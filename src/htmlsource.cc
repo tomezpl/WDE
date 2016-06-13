@@ -27,14 +27,32 @@ void HTMLSource::LoadFromFile(string pathStr)
 	m_HTMLstr = ss.str(); // retrieve the string from the stringstream
 }
 
+void HTMLSource::LoadFromURI(string uriStr)
+{
+	m_HTMLstr = "";
+	m_URIstr = uriStr;
+}
+
+void HTMLSource::LoadFromLocalhost(string resStr)
+{
+	m_HTMLstr = "";
+	m_URIstr = WDE_LOCAL_HOSTNAME;
+	m_URIstr.append(resStr);
+}
+
 gchar* HTMLSource::GetHTML()
 {
 	return (gchar*)m_HTMLstr.c_str(); // return an array of characters for GTK to work with
 }
 
-HTMLSource::HTMLSource(string pathStr)
+gchar* HTMLSource::GetURI()
 {
-	LoadFromFile(pathStr);
+	return (gchar*)m_URIstr.c_str();
+}
+
+HTMLSource::HTMLSource(string resStr)
+{
+	LoadFromLocalhost(resStr);
 }
 
 HTMLSource::~HTMLSource()

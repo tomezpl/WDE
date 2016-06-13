@@ -52,13 +52,29 @@
             </div>
         </a>
         <div id="taskbar">
+            <a href="http://127.0.0.1:1337/test.txt">Test</a>
             <iframe id="clock" src="http://free.timeanddate.com/clock/i58jrgzn/n1323/tluk/tct/pct/tt0/tw0/tm3/ts1" frameborder="0" width="140" height="30" allowTransparency="true"></iframe>
         </div>
     </body>
     
     <script>
+        function AJAXListener()
+        {
+            document.getElementById("menuBtn").innerText = this.responseText;
+        }
+        
+        function testAJAX()
+        {
+            var xhr = new XMLHttpRequest();
+            xhr.load = AJAXListener;
+            xhr.addEventListener("load", AJAXListener);
+            xhr.open("GET", "/test.txt");
+            xhr.send();
+        }
+        
         window.onload = function(){
             document.body.style.backgroundSize = window.innerWidth.toString() + "px " + window.innerHeight.toString() + "px";
+            testAJAX();
         };
     </script>
 </html>
