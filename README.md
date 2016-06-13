@@ -28,11 +28,22 @@ To perform a full build, simply run:
 If you only want to compile objects, take a look at the **Makefile**.
 
 ### Usage
-To use WDE, you need to pass the location of the HTML file to start, the width and the height of the screen.
+#### WDE Desktop (wdesktop)
+The **wdesktop** module provides a desktop session.
 
-For example, to run the index.html file with a resolution 800x600, assuming you're in the root directory of the project:
+To start it, you need to provide the name of the HTML file with the desktop.
 
-`./bin/wde ./html/index.html 800 600`
+For example, if the HTML for the desktop is stored in a file **desktop.html**, you'd run
+
+`./bin/wdesktop desktop.html`
+
+
+
+Note that by default, **wdesktop** will load it from the local server.
+
+To update your local server files, run:
+
+`sudo ./scripts/updatehtml.sh`
 
 ### Licensing and contributing
 WDE uses the MIT license; take a look at the **LICENSE** file.
