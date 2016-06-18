@@ -31,7 +31,6 @@
             font-size: 2.5vh;
         }
         
-        
         #menuBtn {
             background-color: #33cc33;
             position: absolute;
@@ -60,15 +59,50 @@
             right: 0;
             margin: 0px 0px;
         }
+        
+        #menu {
+            position: absolute;
+            left: 0;
+            min-height: 120px;
+            width: 8%;
+            bottom: 40px;
+            background-color: #5cd65c;
+            visibility: hidden;
+        }
+        
+        #menu table tr {
+            height: 40px;
+        }
+        
+        #menu table tr td button {
+            position: relative;
+            width: 100%;
+            bottom: 0;
+            font-size: 1.375vw;
+        }
     </style>
     
     <body style="height: 100%; width: 100%">
         <div style="height: 100%; width: 100%; overflow: hidden">
             <a href="#">
-                <div id="menuBtn">
+                <div id="menuBtn" onclick="toggleMenu()">
                     Menu
                 </div>
             </a>
+            
+            <div id="menu">
+                <table>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                        <td>
+                            <button id="quitBtn">Shutdown WDE</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+                
+            </div>
             <div id="taskbar">
                 <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
                 <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
@@ -84,6 +118,15 @@
     </body>
     
     <script>
+        function toggleMenu()
+        {
+            var menu = document.getElementById("menu");
+            if(menu.style.visibility == "hidden")
+                menu.style.visibility = "visible";
+            else
+                menu.style.visibility = "hidden";
+        }
+        
         function AJAXListener()
         {
             document.getElementById("menuBtn").innerText = this.responseText;
