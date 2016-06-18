@@ -11,19 +11,33 @@
         #taskbar {
             background-color: #2d81ff;
             position: absolute;
-            left: 10%;
-            width: 90%;
+            left: 8%;
+            width: 92%;
             bottom: 0;
-            height: 30px;
+            height: 40px;
+            font-size: 1.375vw;
         }
+        
+        #taskbar .task {
+            position: relative;
+            top: 8px;
+            left: 4px;
+            padding: 5px 5px;
+            border-radius: 10px;
+            background-color: cornflowerblue;
+            color: white;
+            text-shadow: 1px 1px 2px black;
+        }
+        
         
         #menuBtn {
             background-color: #33cc33;
             position: absolute;
             left: 0;
-            width: 10%;
+            width: 8%;
             bottom: 0;
-            height: 30px;
+            height: 40px;
+            font-size: 2vw;
             text-align: center;
             color: white;
             text-shadow: 2px 1px 1px black;
@@ -42,18 +56,28 @@
         #taskbar #clock {
             position: fixed;
             right: 0;
+            margin: 0px 0px;
         }
     </style>
     
-    <body>
-        <a href="#">
-            <div id="menuBtn">
-                Menu
+    <body style="height: 100%; width: 100%">
+        <div style="height: 100%; width: 100%; overflow: hidden">
+            <a href="#">
+                <div id="menuBtn">
+                    Menu
+                </div>
+            </a>
+            <div id="taskbar">
+                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
+                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
+                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
+                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
+                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
+                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
+                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
+                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
+                <iframe id="clock" src="http://free.timeanddate.com/clock/i58jrgzn/n1323/tluk/tct/pct/tt0/tw0/tm3/ts1" frameborder="0" width="140" height="30" allowTransparency="true"></iframe>
             </div>
-        </a>
-        <div id="taskbar">
-            <a href="http://127.0.0.1:1337/test.txt">Test</a>
-            <iframe id="clock" src="http://free.timeanddate.com/clock/i58jrgzn/n1323/tluk/tct/pct/tt0/tw0/tm3/ts1" frameborder="0" width="140" height="30" allowTransparency="true"></iframe>
         </div>
     </body>
     
@@ -74,7 +98,7 @@
         
         window.onload = function(){
             document.body.style.backgroundSize = window.innerWidth.toString() + "px " + window.innerHeight.toString() + "px";
-            testAJAX();
+            //testAJAX();
         };
     </script>
 </html>

@@ -4,6 +4,9 @@
 #ifndef WDE_RENDERER
 #define WDE_RENDERER
 
+#define WDE_RENDERER_DEF_WIDTH 1920
+#define WDE_RENDERER_DEF_HEIGHT 1080
+
 #include <gtk/gtk.h>
 #include <webkit2/webkit2.h>
 #include <iostream>
@@ -16,8 +19,10 @@ namespace WDE
 	class Renderer
     {
         private:
-			// Root window of the program
+			// Root window of the program and its size
             GtkWindow* m_Window;
+			gint m_WindowWidth;
+			gint m_WindowHeight;
 
 			// Main webview
 			WebKitWebView* m_WebView;
@@ -35,6 +40,8 @@ namespace WDE
 			WDE::HTMLSource* m_HTMLSource;
 			
 			bool m_IsFullscreen;
+			
+			void UpdateSize();
         public:
 			// Initialise GTK+ before using it.
 			static gboolean InitGTK(int &argc, char* argv[]);

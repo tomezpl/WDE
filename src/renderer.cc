@@ -22,8 +22,11 @@ Renderer::Renderer(unsigned short width, unsigned short height, char* argv[])
 	
 	m_WebSettings = webkit_settings_new();
 	
+	m_WindowWidth = width;
+	m_WindowHeight = height;
+	
 	m_Window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
-	gtk_window_resize(m_Window, width, height);
+	gtk_window_resize(m_Window, m_WindowWidth, m_WindowHeight);
 	g_signal_connect(GTK_WIDGET(m_Window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
 	
 	m_WebView = WEBKIT_WEB_VIEW(webkit_web_view_new());
@@ -41,12 +44,18 @@ void Renderer::GoFullscreen()
 	gtk_window_fullscreen(m_Window);
 	GdkScreen* defScreen = gdk_screen_get_default();
 	gtk_window_resize(m_Window, gdk_screen_get_width(defScreen), gdk_screen_get_height(defScreen));
+	UpdateSize();
+	gtk_widget_set_hexpand(GTK_WIDGET(m_Window), FALSE);
+	gtk_widget_set_vexpand(GTK_WIDGET(m_Window), FALSE);
+	webkit_web_view_set_zoom_level(m_WebView, (gdouble)m_WindowWidth / (gdouble)WDE_RENDERER_DEF_WIDTH);
+	cout << "Zoom set to " << (gdouble)m_WindowWidth / (gdouble)WDE_RENDERER_DEF_WIDTH << endl;
 }
 
 void Renderer::GoWindowed()
 {
 	m_IsFullscreen = false;
 	gtk_window_unfullscreen(m_Window);
+	UpdateSize();
 }
 
 void Renderer::ToggleFullscreen()
@@ -55,6 +64,16 @@ void Renderer::ToggleFullscreen()
 		GoWindowed();
 	else
 		GoFullscreen();
+}
+
+void Renderer::UpdateSize()
+{
+	// Reset size
+	m_WindowWidth = 0;
+	m_WindowHeight = 0;
+	
+	// Update size
+	gtk_window_get_size(m_Window, &m_WindowWidth, &m_WindowHeight);
 }
 
 void Renderer::MainLoop()
