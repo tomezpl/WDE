@@ -2,7 +2,7 @@
 
 # It is advised to build WDE with g++.
 # g++ 4.8 should work fine.
-# The CC variable will be used to define the compiler.
+# The CC variable will be used to define the compiler. It also sets the C++ standard to C++11.
 CC=g++ -std=c++11
 
 # 32-bit flags for CC are defined by the x86 variable
