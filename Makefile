@@ -18,15 +18,23 @@ GTK_DEV=`pkg-config --cflags gtk+-3.0 webkit2gtk-3.0`
 # These will only be added when objects are linked into program binaries
 GTK_LIB=`pkg-config --libs gtk+-3.0 webkit2gtk-3.0`
 
+# LibMicroHTTPD headers
+# These will be added when objects (.o files) are compiled and linked
+MHD_DEV=`pkg-config --cflags libmicrohttpd`
+
+# LibMicroHTTPD libraries
+# These will only be added when objects are linked into program binaries
+MHD_LIB=`pkg-config --libs libmicrohttpd`
+
 all: createdirs wdesktop
 
 createdirs:
 	mkdir ./obj
 	mkdir ./bin
 
-wdesktop: wdesktop.o renderer.o htmlsource.o
+wdesktop: wdesktop.o renderer.o htmlsource.o httpserver.o
 	@echo Linking object files into WDE wdesktop binary...
-	$(CC) -o./bin/wdesktop ./obj/wdesktop.o ./obj/renderer.o ./obj/htmlsource.o $(GTK_DEV) $(GTK_LIB)
+	$(CC) -o./bin/wdesktop ./obj/wdesktop.o ./obj/renderer.o ./obj/htmlsource.o ./obj/httpserver.o $(GTK_DEV) $(GTK_LIB) $(MHD_DEV) $(MHD_LIB)
 	@echo Finished linking. See CC output if there are any errors.
 
 wdesktop.o: ./src/wdesktop.cc
@@ -43,6 +51,11 @@ htmlsource.o: ./src/htmlsource.cc
 	@echo Compiling WDE HTML data source module...
 	$(CC) -c -o./obj/htmlsource.o ./src/htmlsource.cc $(GTK_DEV)
 	@echo WDE HTML data source module compiled. See CC output if there are any errors.
+
+httpserver.o: ./src/httpserver.cc
+	@echo Compiling WDE HTTP server module...
+	$(CC) -c -o./obj/httpserver.o ./src/httpserver.cc $(MHD_DEV)
+	@echo WDE HTTP server module compiled. See CC output if there are any errors.
 
 clean:
 	@echo Cleaning WDE binaries...
