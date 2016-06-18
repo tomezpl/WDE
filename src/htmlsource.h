@@ -12,7 +12,6 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <gtk/gtk.h>
 
 namespace WDE
 {
@@ -24,7 +23,7 @@ namespace WDE
 			// Default constructor
 			HTMLSource();
 			
-			// Constructor that will call LoadFromFile
+			// Constructor that will call LoadFromLocalhost
 			HTMLSource(std::string pathStr);
 			
 			// Destructor
@@ -43,11 +42,11 @@ namespace WDE
 			
 			// WebKitGTK loads strings in gchar datatype
 			// This function will convert the HTML string to an array of characters
-			gchar* GetHTML();
+			const char* GetHTML();
 			
 			// WebKitGTK loads URIs in gchar datatype
 			// This function will convert the URI string to an array of characters
-			gchar* GetURI();
+			const char* GetURI();
 	};
 }
 

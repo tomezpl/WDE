@@ -40,19 +40,24 @@ void HTMLSource::LoadFromLocalhost(string resStr)
 	m_URIstr.append(resStr);
 }
 
-gchar* HTMLSource::GetHTML()
+const char* HTMLSource::GetHTML()
 {
-	return (gchar*)m_HTMLstr.c_str(); // return an array of characters for GTK to work with
+	return m_HTMLstr.c_str(); // return an array of characters
 }
 
-gchar* HTMLSource::GetURI()
+const char* HTMLSource::GetURI()
 {
-	return (gchar*)m_URIstr.c_str();
+	return m_URIstr.c_str();
 }
 
 HTMLSource::HTMLSource(string resStr)
 {
 	LoadFromLocalhost(resStr);
+}
+
+HTMLSource::HTMLSource()
+{
+	
 }
 
 HTMLSource::~HTMLSource()
