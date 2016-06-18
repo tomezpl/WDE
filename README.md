@@ -6,15 +6,15 @@ WDE is a desktop environment for GNU/Linux. Its graphical user interface uses HT
 
 ### Building
 #### Dependencies
-WDE requires GTK+2.0 and WebKitGTK+1.0.
+WDE requires GTK+3.0 and WebKit2GTK+3.0.
 If you're on a Debian system, you'll probably need these packages:
-* libgtk2.0-dev
-* libwebkitgtk-dev
+* libgtk-3-dev
+* libwebkit2gtk-3.0-dev
 
 To install the dependencies using apt in Debian-based distros, run this command:
-`apt-get install libgtk2.0-dev libwebkitgtk-dev`
+`apt-get install libgtk-3-dev libwebkit2gtk-3.0-dev`
 
-You may need to run this as root, in which case run `su` and log into the root account with a password, or use `sudo apt-get install libgtk2.0-dev libwebkitgtk-dev` if you have `sudo` installed.
+You may need to run this as root, in which case run `su` and log into the root account with a password, or use `sudo apt-get install libgtk-3-dev libwebkit2gtk-3.0-dev` if you have `sudo` installed.
 
 #### Compiling and linking
 WDE uses GNU make to produce binaries. 
