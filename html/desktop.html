@@ -96,7 +96,7 @@
                     <tr></tr>
                     <tr>
                         <td>
-                            <button id="quitBtn">Shutdown WDE</button>
+                            <button id="quitBtn" onclick="shutdown()">Shutdown WDE</button>
                         </td>
                     </tr>
                 </table>
@@ -140,6 +140,13 @@
             xhr.open("GET", "/test.txt");
             xhr.send();
         }
+        
+        function shutdown()
+        {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "/shutdown");
+			xhr.send();
+		}
         
         window.onload = function(){
             document.body.style.backgroundSize = window.innerWidth.toString() + "px " + window.innerHeight.toString() + "px";
