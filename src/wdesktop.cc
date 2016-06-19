@@ -9,7 +9,7 @@
 int main(int argc, char* argv[])
 {
 	WDE::BaseRenderer::InitGTK(argc, argv); // Initialise GTK before doing anything
-	WDE::BaseRenderer* renderer = new WDE::BaseRenderer(640, 480, argv); // Create a new renderer
+	WDE::DesktopRenderer* renderer = new WDE::DesktopRenderer(640, 480, argv); // Create a new renderer
 	
 	WDE::HTTPServer* httpserv = new WDE::HTTPServer();
 	

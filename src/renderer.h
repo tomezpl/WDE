@@ -6,5 +6,6 @@
 #define WDE_RENDERER
 
 #include "renderer/renderer_base.h"
+#include "renderer/renderer_desktop.h"
 
 #endif

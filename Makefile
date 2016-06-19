@@ -32,9 +32,9 @@ createdirs:
 	mkdir ./obj
 	mkdir ./bin
 
-wdesktop: wdesktop.o renderer_base.o htmlsource.o httpserver.o
+wdesktop: wdesktop.o renderer_base.o renderer_desktop.o htmlsource.o httpserver.o
 	@echo Linking object files into WDE wdesktop binary...
-	$(CC) -o./bin/wdesktop ./obj/wdesktop.o ./obj/renderer_base.o ./obj/htmlsource.o ./obj/httpserver.o $(GTK_DEV) $(GTK_LIB) $(MHD_DEV) $(MHD_LIB)
+	$(CC) -o./bin/wdesktop ./obj/wdesktop.o ./obj/renderer_base.o ./obj/renderer_desktop.o ./obj/htmlsource.o ./obj/httpserver.o $(GTK_DEV) $(GTK_LIB) $(MHD_DEV) $(MHD_LIB)
 	@echo Finished linking. See CC output if there are any errors.
 
 wdesktop.o: ./src/wdesktop.cc
@@ -46,6 +46,11 @@ renderer_base.o: ./src/renderer/renderer_base.cc
 	@echo Compiling WDE base renderer module...
 	$(CC) -c -o./obj/renderer_base.o ./src/renderer/renderer_base.cc $(GTK_DEV)
 	@echo WDE base renderer module compiled. See CC output if there are any errors.
+
+renderer_desktop.o: ./src/renderer/renderer_desktop.cc
+	@echo Compiling WDE desktop renderer module...
+	$(CC) -c -o./obj/renderer_desktop.o ./src/renderer/renderer_desktop.cc $(GTK_DEV)
+	@echo WDE desktop renderer module compiled. See CC output if there are any errors.
 
 htmlsource.o: ./src/htmlsource.cc
 	@echo Compiling WDE HTML data source module...
