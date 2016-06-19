@@ -47,8 +47,6 @@ void BaseRenderer::GoFullscreen()
 	UpdateSize();
 	gtk_widget_set_hexpand(GTK_WIDGET(m_Window), FALSE);
 	gtk_widget_set_vexpand(GTK_WIDGET(m_Window), FALSE);
-	webkit_web_view_set_zoom_level(m_WebView, (gdouble)m_WindowWidth / (gdouble)WDE_RENDERER_DEF_WIDTH);
-	cout << "Zoom set to " << (gdouble)m_WindowWidth / (gdouble)WDE_RENDERER_DEF_WIDTH << endl;
 }
 
 void BaseRenderer::GoWindowed()
