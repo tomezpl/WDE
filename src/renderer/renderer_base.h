@@ -18,7 +18,7 @@ namespace WDE
 {
 	class BaseRenderer
     {
-        private:
+        protected:
 			// Root window of the program and its size
             GtkWindow* m_Window;
 			gint m_WindowWidth;
