@@ -1,8 +1,8 @@
-// renderer.h
-// Header file for the Renderer class.
+// renderer/renderer_base.h
+// Header file for the BaseRenderer class.
 
-#ifndef WDE_RENDERER
-#define WDE_RENDERER
+#ifndef WDE_RENDERER_BASE
+#define WDE_RENDERER_BASE
 
 #define WDE_RENDERER_DEF_WIDTH 1920
 #define WDE_RENDERER_DEF_HEIGHT 1080
@@ -12,11 +12,11 @@
 #include <iostream>
 #include <string>
 
-#include "htmlsource.h"
+#include "../htmlsource.h"
 
 namespace WDE
 {
-	class Renderer
+	class BaseRenderer
     {
         private:
 			// Root window of the program and its size
@@ -52,7 +52,7 @@ namespace WDE
 			// Constructor that will create a window and a webview based on the resolution
 			// It will also load the HTML file specified as the first argument
 			// (hence argument array needs to be passed to argv)
-            Renderer(unsigned short width, unsigned short height, char* argv[]);
+            BaseRenderer(unsigned short width, unsigned short height, char* argv[]);
             
 			// Switch window types
 			void GoFullscreen();
@@ -63,7 +63,7 @@ namespace WDE
             void MainLoop();
             
             // Destructor
-            ~Renderer();
+            ~BaseRenderer();
     };
 }
 

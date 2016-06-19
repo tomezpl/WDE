@@ -8,8 +8,8 @@
 
 int main(int argc, char* argv[])
 {
-	WDE::Renderer::InitGTK(argc, argv); // Initialise GTK before doing anything
-	WDE::Renderer* renderer = new WDE::Renderer(640, 480, argv); // Create a new renderer
+	WDE::BaseRenderer::InitGTK(argc, argv); // Initialise GTK before doing anything
+	WDE::BaseRenderer* renderer = new WDE::BaseRenderer(640, 480, argv); // Create a new renderer
 	
 	WDE::HTTPServer* httpserv = new WDE::HTTPServer();
 	

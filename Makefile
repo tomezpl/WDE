@@ -32,9 +32,9 @@ createdirs:
 	mkdir ./obj
 	mkdir ./bin
 
-wdesktop: wdesktop.o renderer.o htmlsource.o httpserver.o
+wdesktop: wdesktop.o renderer_base.o htmlsource.o httpserver.o
 	@echo Linking object files into WDE wdesktop binary...
-	$(CC) -o./bin/wdesktop ./obj/wdesktop.o ./obj/renderer.o ./obj/htmlsource.o ./obj/httpserver.o $(GTK_DEV) $(GTK_LIB) $(MHD_DEV) $(MHD_LIB)
+	$(CC) -o./bin/wdesktop ./obj/wdesktop.o ./obj/renderer_base.o ./obj/htmlsource.o ./obj/httpserver.o $(GTK_DEV) $(GTK_LIB) $(MHD_DEV) $(MHD_LIB)
 	@echo Finished linking. See CC output if there are any errors.
 
 wdesktop.o: ./src/wdesktop.cc
@@ -42,10 +42,10 @@ wdesktop.o: ./src/wdesktop.cc
 	$(CC) -c -o./obj/wdesktop.o ./src/wdesktop.cc $(GTK_DEV)
 	@echo Main WDE module compiled. See CC output if there are any errors.
 
-renderer.o: ./src/renderer.cc
-	@echo Compiling WDE renderer module...
-	$(CC) -c -o./obj/renderer.o ./src/renderer.cc $(GTK_DEV)
-	@echo WDE renderer module compiled. See CC output if there are any errors.
+renderer_base.o: ./src/renderer/renderer_base.cc
+	@echo Compiling WDE base renderer module...
+	$(CC) -c -o./obj/renderer_base.o ./src/renderer/renderer_base.cc $(GTK_DEV)
+	@echo WDE base renderer module compiled. See CC output if there are any errors.
 
 htmlsource.o: ./src/htmlsource.cc
 	@echo Compiling WDE HTML data source module...

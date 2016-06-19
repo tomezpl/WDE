@@ -1,19 +1,19 @@
-// renderer.cc
-// This implements the Renderer class.
+// renderer/renderer_base.cc
+// This implements the BaseRenderer class.
 // It is used to render and display the UI in a GTK window.
 
-#include "renderer.h"
+#include "renderer_base.h"
 
 using namespace WDE;
 using namespace std;
 
-gboolean Renderer::DestroyWebView(WebKitWebView* webView, GtkWidget* window)
+gboolean BaseRenderer::DestroyWebView(WebKitWebView* webView, GtkWidget* window)
 {
 	gtk_widget_destroy(window);
 	return TRUE;
 }
 
-Renderer::Renderer(unsigned short width, unsigned short height, char* argv[])
+BaseRenderer::BaseRenderer(unsigned short width, unsigned short height, char* argv[])
 {
 	m_IsFullscreen = false;
 	
@@ -38,7 +38,7 @@ Renderer::Renderer(unsigned short width, unsigned short height, char* argv[])
 	webkit_web_view_load_uri(m_WebView, m_HTMLSource->GetURI());
 }
 
-void Renderer::GoFullscreen()
+void BaseRenderer::GoFullscreen()
 {
 	m_IsFullscreen = true;
 	gtk_window_fullscreen(m_Window);
@@ -51,14 +51,14 @@ void Renderer::GoFullscreen()
 	cout << "Zoom set to " << (gdouble)m_WindowWidth / (gdouble)WDE_RENDERER_DEF_WIDTH << endl;
 }
 
-void Renderer::GoWindowed()
+void BaseRenderer::GoWindowed()
 {
 	m_IsFullscreen = false;
 	gtk_window_unfullscreen(m_Window);
 	UpdateSize();
 }
 
-void Renderer::ToggleFullscreen()
+void BaseRenderer::ToggleFullscreen()
 {
 	if(m_IsFullscreen)
 		GoWindowed();
@@ -66,7 +66,7 @@ void Renderer::ToggleFullscreen()
 		GoFullscreen();
 }
 
-void Renderer::UpdateSize()
+void BaseRenderer::UpdateSize()
 {
 	// Reset size
 	m_WindowWidth = 0;
@@ -76,7 +76,7 @@ void Renderer::UpdateSize()
 	gtk_window_get_size(m_Window, &m_WindowWidth, &m_WindowHeight);
 }
 
-void Renderer::MainLoop()
+void BaseRenderer::MainLoop()
 {
 	gtk_window_present(m_Window);
 	gtk_widget_show_all(GTK_WIDGET(m_Window));
@@ -84,7 +84,7 @@ void Renderer::MainLoop()
 }
 
 // Initialise GTK+ before using it.
-gboolean Renderer::InitGTK(int &argc, char* argv[])
+gboolean BaseRenderer::InitGTK(int &argc, char* argv[])
 {
 	gboolean success = gtk_init_check(&argc, &argv);
 	if(success)
@@ -94,7 +94,7 @@ gboolean Renderer::InitGTK(int &argc, char* argv[])
 	return success;
 }
 
-Renderer::~Renderer()
+BaseRenderer::~BaseRenderer()
 {
 	delete m_WebView;
 	delete m_Window;
