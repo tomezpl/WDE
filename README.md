@@ -10,11 +10,12 @@ WDE requires GTK+3.0 and WebKit2GTK+3.0.
 If you're on a Debian system, you'll probably need these packages:
 * libgtk-3-dev
 * libwebkit2gtk-3.0-dev
+* libmicrohttpd-dev
 
 To install the dependencies using apt in Debian-based distros, run this command:
-`apt-get install libgtk-3-dev libwebkit2gtk-3.0-dev`
+`apt-get install libgtk-3-dev libwebkit2gtk-3.0-dev libmicrohttpd-dev`
 
-You may need to run this as root, in which case run `su` and log into the root account with a password, or use `sudo apt-get install libgtk-3-dev libwebkit2gtk-3.0-dev` if you have `sudo` installed.
+You may need to run this as root, in which case run `su` and log into the root account with a password, or use `sudo apt-get install libgtk-3-dev libwebkit2gtk-3.0-dev libmicrohttpd-dev` if you have `sudo` installed.
 
 #### Compiling and linking
 WDE uses GNU make to produce binaries. 
