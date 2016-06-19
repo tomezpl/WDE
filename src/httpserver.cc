@@ -4,14 +4,14 @@
 using namespace WDE;
 using namespace std;
 
-int HandleRequest 
+int HTTPServer::HandleRequest 
 			(void* cls, struct MHD_Connection* connection,
 			 const char* url, const char* method,
 			 const char* version, const char* data,
 			 size_t* data_size, void** con_cls)
 {
-	/*if(m_Status == -1)
-		return -1;*/
+	if(m_Status == -1)
+		return -1;
 	const char* responseStr = "";
 	string urlStr = url;
 	cout << "HTTPD:\n\tRequested URL: " << urlStr << endl;
@@ -21,7 +21,7 @@ int HandleRequest
 		cout << "HTTPD:\n\tRequested SHUTDOWN command. Terminating process." << endl;
 		exit(EXIT_SUCCESS);
 	}
-	else if(urlStr == "/desktop.html")
+	else
 	{
 		HTMLSource* html = new HTMLSource();
 		string pathStr = WDE_HTML_DIR;
@@ -29,12 +29,12 @@ int HandleRequest
 		html->LoadFromFile(pathStr);
 		responseStr = html->GetHTML();
 	}
-	else
+	/*else
 	{
 		responseStr = "<html><body><h1>404 - File not found</h1><p>";
 		responseStr.append(urlStr);
 		responseStr.append(" not found.</p></body></html>");
-	}
+	}*/
 	
 	int ret;
 	struct MHD_Response* response;
@@ -47,12 +47,22 @@ int HandleRequest
 	return ret;
 }
 
+int HTTPServer::CallHandler
+			(void* cls, struct MHD_Connection* connection,
+			 const char* url, const char* method,
+			 const char* version, const char* data,
+			 size_t* data_size, void** con_cls)
+{
+	HTTPServer* httpServ = static_cast<HTTPServer*>(cls);
+	return httpServ->HandleRequest(cls, connection, url, method, version, data, data_size, con_cls);
+}
+
 HTTPServer::HTTPServer()
 {
 	m_HTTPD = MHD_start_daemon(
 								MHD_USE_SELECT_INTERNALLY, 
 								HTTP_PORT, NULL, NULL,
-								&HandleRequest, NULL,
+								CallHandler, this,
 								MHD_OPTION_END);
 	if(daemon == NULL)
 		m_Status = -1;

@@ -26,11 +26,11 @@ namespace WDE {
 			// 1 (successfully created)
 			short m_Status;
 			
-			/*int HandleRequest  
+			int HandleRequest  
 				(void* cls, struct MHD_Connection* connection,
 				 const char* url, const char* method,
 				 const char* version, const char* data,
-				 size_t* data_size, void** con_cls);*/
+				 size_t* data_size, void** con_cls);
 		public:
 			static int CallHandler
 				(void* cls, struct MHD_Connection* connection,
