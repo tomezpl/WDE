@@ -29,6 +29,12 @@ int HandleRequest
 		html->LoadFromFile(pathStr);
 		responseStr = html->GetHTML();
 	}
+	else
+	{
+		responseStr = "<html><body><h1>404 - File not found</h1><p>";
+		responseStr.append(urlStr);
+		responseStr.append(" not found.</p></body></html>");
+	}
 	
 	int ret;
 	struct MHD_Response* response;
