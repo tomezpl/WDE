@@ -1,3 +1,4 @@
+![Example of a WDE layout](http://i.imgur.com/EnAJHkk.png)
 # WDE
 ## Web-based Desktop Environment
 
