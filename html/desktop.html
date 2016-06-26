@@ -119,6 +119,7 @@
 		
 		function updateTasksListener()
 		{
+			tasks = [];
 			var re = this.responseText;
 			var lines = re.match(/^.*([\n\r]+|$)/gm);
 			for(var i = 0; i < lines.length; i++)
@@ -182,6 +183,7 @@
             document.body.style.backgroundSize = window.innerWidth.toString() + "px " + window.innerHeight.toString() + "px";
             //testAJAX();
             getTasks();
+	    window.setInterval(1000, getTasks);
         };
     </script>
 </html>
