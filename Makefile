@@ -32,9 +32,9 @@ createdirs:
 	mkdir ./obj
 	mkdir ./bin
 
-wdesktop: wdesktop.o renderer_base.o renderer_desktop.o htmlsource.o httpserver.o utilfunc.o
+wdesktop: wdesktop.o renderer_base.o renderer_desktop.o htmlsource.o httpserver.o utilfunc.o wdewm.o
 	@echo Linking object files into WDE wdesktop binary...
-	$(CC) -o./bin/wdesktop ./obj/wdesktop.o ./obj/renderer_base.o ./obj/renderer_desktop.o ./obj/htmlsource.o ./obj/httpserver.o ./obj/utilfunc.o $(GTK_DEV) $(GTK_LIB) $(MHD_DEV) $(MHD_LIB)
+	$(CC) -o./bin/wdesktop ./obj/wdesktop.o ./obj/renderer_base.o ./obj/renderer_desktop.o ./obj/htmlsource.o ./obj/httpserver.o ./obj/utilfunc.o ./obj/wdewm.o $(GTK_DEV) $(GTK_LIB) $(MHD_DEV) $(MHD_LIB)
 	@echo Finished linking. See CC output if there are any errors.
 
 wdesktop.o: ./src/wdesktop.cc
@@ -66,6 +66,11 @@ utilfunc.o: ./src/utilfunc.cc
 	@echo Compiling WDE utility module...
 	$(CC) -c -o./obj/utilfunc.o ./src/utilfunc.cc
 	@echo WDE utility module compiled. See CC output if there are any errors.
+
+wdewm.o: ./src/wdewm.cc
+	@echo Compiling WDE window manager module...
+	$(CC) -c -o./obj/wdewm.o ./src/wdewm.cc
+	@echo WDE window manager module compiled. See CC output if there are any errors.
 
 clean:
 	@echo Cleaning WDE binaries...

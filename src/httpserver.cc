@@ -1,5 +1,6 @@
 #include "httpserver.h"
 #include "htmlsource.h"
+#include "wdewm.h"
 
 using namespace WDE;
 using namespace std;
@@ -20,6 +21,10 @@ int HTTPServer::HandleRequest
 	{
 		cout << "HTTPD:\n\tRequested SHUTDOWN command. Terminating process." << endl;
 		exit(EXIT_SUCCESS);
+	}
+	else if(urlStr == "/getalltasks")
+	{
+		responseStr = WindowManager::GetAllWindows().c_str();
 	}
 	else
 	{

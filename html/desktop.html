@@ -104,20 +104,50 @@
                 
             </div>
             <div id="taskbar">
-                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
-                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
-                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
-                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
-                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
-                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
-                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
-                <a class="task" href="http://127.0.0.1:1337/test.txt">Test</a>
-                <iframe id="clock" src="http://free.timeanddate.com/clock/i58jrgzn/n1323/tluk/tct/pct/tt0/tw0/tm3/ts1" frameborder="0" width="140" height="30" allowTransparency="true"></iframe>
+                
             </div>
         </div>
     </body>
     
     <script>
+		var tasks = new Array();
+		
+		function addClock()
+		{
+			document.getElementById("taskbar").innerHTML += "<iframe id=\"clock\" src=\"http://free.timeanddate.com/clock/i58jrgzn/n1323/tluk/tct/pct/tt0/tw0/tm3/ts1\" frameborder=\"0\" width=\"140\" height=\"30\" allowTransparency=\"true\"></iframe>";
+		}
+		
+		function updateTasksListener()
+		{
+			var re = this.responseText;
+			var lines = re.match(/^.*([\n\r]+|$)/gm);
+			for(var i = 0; i < lines.length; i++)
+			{
+				tasks.push({"name":lines[i].substr(lines[i].indexOf(" \"") + 2, lines[i].length), "id":lines[i].substr(0, lines[i].indexOf(" "))});
+			}
+			for(var i = 0; i < tasks.length; i++)
+			{
+				tasks[i].name = tasks[i].name.slice(0, tasks[i].name.length - 2);
+			}
+			
+			var taskbar = document.getElementById("taskbar");
+			taskbar.innerHTML = "";
+			for(var i = 0; i < tasks.length - 3; i++)
+			{
+				taskbar.innerHTML += "<a href=\"#\" class=\"task\">" + tasks[i].name + "</a>";
+			}
+			addClock();
+		}
+		
+		function getTasks()
+		{
+			var xhr = new XMLHttpRequest();
+			xhr.load = updateTasksListener;
+			xhr.addEventListener("load", updateTasksListener);
+			xhr.open("GET", "/getalltasks");
+			xhr.send();
+		}
+		
         function toggleMenu()
         {
             var menu = document.getElementById("menu");
@@ -151,6 +181,7 @@
         window.onload = function(){
             document.body.style.backgroundSize = window.innerWidth.toString() + "px " + window.innerHeight.toString() + "px";
             //testAJAX();
+            getTasks();
         };
     </script>
 </html>
