@@ -133,9 +133,10 @@
 			
 			var taskbar = document.getElementById("taskbar");
 			taskbar.innerHTML = "";
-			for(var i = 0; i < tasks.length - 3; i++)
+			for(var i = 0; i < tasks.length; i++)
 			{
-				taskbar.innerHTML += "<a href=\"#\" class=\"task\">" + tasks[i].name + "</a>";
+				if(tasks[i].name != "" && tasks[i].name != "wdesktop" && tasks[i].name != "WebKitWebProcess\"" && tasks[i].name != "WebKitWebProcess")
+					taskbar.innerHTML += "<a href=\"#\" class=\"task\">" + tasks[i].name + "</a>";
 			}
 			addClock();
 		}
@@ -183,7 +184,7 @@
             document.body.style.backgroundSize = window.innerWidth.toString() + "px " + window.innerHeight.toString() + "px";
             //testAJAX();
             getTasks();
-	    window.setInterval(1000, getTasks);
+			window.setInterval(getTasks, 1000);
         };
     </script>
 </html>
